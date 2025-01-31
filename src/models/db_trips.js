@@ -995,7 +995,7 @@ const clients = [
 ];
 
 // Export the arrays (optional usage in a Node environment)
-module.exports = {
+export {
   trips,
   guides,
   clients

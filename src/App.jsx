@@ -1,19 +1,20 @@
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TravelListPage from "./components/pages/TravelListPage.jsx"
+import TravelDetailsPage from "./components/pages/TravelDetailsPage.jsx"
+import DefaultLayout from "./components/layout/DefaultLayout.jsx"
 
-function App() {
+export default function App() {
     return (
-        <>
-            <h1 className="w-full py-4 text-6xl text-center">
-                My React Template
-            </h1>
-            <h2 className="py-4 text-3xl text-center">Packages installed:</h2>
-            <ul className="text-center">
-                <li>Tailwind css</li>
-                <li>react-router-dom</li>
-                <li>axios</li>
-            </ul>
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route element={<DefaultLayout />}>
+                    <Route path="/">
+                        <Route index element={<TravelListPage />} />
+                        <Route path=":id" element={<TravelDetailsPage />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
-export default App;
