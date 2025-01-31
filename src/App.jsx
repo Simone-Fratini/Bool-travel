@@ -1,18 +1,15 @@
+import { BrowserRouter, Router, Route } from "react-router-dom";
+import TravelListPage from "./pages/TravelListPage.jsx"
 import "./App.css";
 
 function App() {
     return (
-        <>
-            <h1 className="w-full py-4 text-6xl text-center">
-                My React Template
-            </h1>
-            <h2 className="py-4 text-3xl text-center">Packages installed:</h2>
-            <ul className="text-center">
-                <li>Tailwind css</li>
-                <li>react-router-dom</li>
-                <li>axios</li>
-            </ul>
-        </>
+        <BrowserRouter>
+            <Router>
+                <Route path="/" element={<TravelListPage />} />
+
+            </Router>
+        </BrowserRouter>
     );
 }
 
