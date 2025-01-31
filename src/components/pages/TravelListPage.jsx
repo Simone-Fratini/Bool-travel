@@ -1,3 +1,10 @@
+import TravelComponent from "../common/TravelComponent"
+import { trips, guides, clients } from "../../models/db_trips"
+
 export default function TravelListPage() {
-    return <h1>TRAVEL LIST</h1>
+    return (
+        trips.map((trip) => {
+            return <TravelComponent tripData={trip} />
+        })
+    )
 }
