@@ -1,14 +1,15 @@
-import HeaderComponent from "./HeaderComponet"
+import HeaderComponent from "./HeaderComponent"
 import FooterComponent from "./FooterComponent"
 import { Outlet } from "react-router-dom"
 
-export default DefaultLayout(){
+
+export default function DefaultLayout() {
 
     return (
         <>
             <HeaderComponent />
             <Outlet />
-            <FooterComponennt />
+            <FooterComponent />
         </>
     )
 }
