@@ -4,9 +4,11 @@ import { trips, guides, clients } from "../../models/db_trips"
 
 export default function TravelListPage() {
     return (
-        trips.map((trip) => {
-            return <TravelComponent tripData={trip} />
-        })
+        <main>
+            {trips.map((trip) => {
+                return <TravelComponent key={trip.id} tripData={trip} />
+            })}
+        </main>
     )
 }
 
