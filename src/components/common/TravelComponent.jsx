@@ -2,7 +2,7 @@
 
 export default function TravelComponent({ tripData }) {
     return (
-        <div>
+        <div className="one-trip">
             <div>
                 <h2>{tripData.tripName}</h2>
                 <h3>{location}</h3>
