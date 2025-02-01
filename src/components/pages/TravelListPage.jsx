@@ -9,10 +9,10 @@ export default function TravelListPage() {
     return (
         <>
             {
-                trips.map((trip) => {
+                trips.map((trip, index) => {
                     return (
                         <div key={trip.id}>
-                            <TravelComponent tripData={trip} />
+                            <TravelComponent tripData={trip} index={index} />
                             <button>Dettaglio</button>
                             <hr />
                             <br />
