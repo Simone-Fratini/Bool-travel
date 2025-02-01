@@ -27,7 +27,7 @@ export default function TravelDetailsPage({ trip, index }) {
                     return (
                         <div key={client.id} >
                             <ClientNamSurComponent key={client.id} clientData={client} />
-                            <Link to={`/${id}`}>Dettaglio cliente</Link>
+                            <Link to={`/${client.id}`}>Dettaglio cliente</Link>
                             <ClientDetailsComponent clientData={client} />{/* dare l'equivalente Tailwind di className="d-none" per questo <ClientDetailsComponent />, alternata da un className="d-block" grazie ad una logica toggle ogni volta che si clicca il pulsante */}
                         </div>
                     )
