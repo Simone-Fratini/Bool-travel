@@ -9,6 +9,9 @@ export default function TravelListPage() {
 
     return (
         <>
+
+
+
             {
                 trips.map((trip, index) => {
                     return (
