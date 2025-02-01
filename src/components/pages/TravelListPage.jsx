@@ -1,6 +1,7 @@
 
 import TravelComponent from "../common/TravelComponent"
 import { trips } from "../../models/db_trips.js"
+import { Link } from "react-router-dom"
 
 
 
@@ -13,7 +14,7 @@ export default function TravelListPage() {
                     return (
                         <div key={trip.id}>
                             <TravelComponent tripData={trip} index={index} />
-                            <button>Dettaglio</button>
+                            <Link to={`/${id}`}>Dettaglio viaggio</Link>
                             <hr />
                             <br />
                         </div>

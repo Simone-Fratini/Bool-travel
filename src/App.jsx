@@ -8,9 +8,11 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route element={<DefaultLayout />}>
-                    <Route path="/">
-                        <Route index element={<TravelListPage />} />
-                        <Route path=":id" element={<TravelDetailsPage />} />
+                    {/* index = path="/" */}
+                    <Route path="/" element={<TravelListPage />}>
+                        <Route path=":id" element={<TravelDetailsPage />}>
+                            <Route path=":id" element={<TravelDetailsPage />} />
+                        </Route>
                     </Route>
                 </Route>
             </Routes>
