@@ -1,3 +1,21 @@
+import React from 'react';
+import {Link} from 'react-router-dom';
+import { Plane } from 'lucide-react';
+
 export default function HeaderComponent() {
-    return <h1>HEDER</h1>
+    return (
+    <header className="bg-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center space-x-2">
+              <Plane className="h-8 w-8 text-blue-600" />
+              <span className="text-xl font-bold text-gray-800">TravelBool</span>
+            </Link>
+          </div>
+          
+        </div>
+      </div>
+    </header>
+    )
 }
