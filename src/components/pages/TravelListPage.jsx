@@ -1,4 +1,4 @@
-import TravelComponent from "../common/TravelComponent";
+import TravelCardComponent from "../common/TravelCardComponent.jsx";
 import { trips, clients } from "../../models/db_trips.js";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export default function TravelListPage() {
             to={`/${trip.id}`}
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 block"
           >
-            <TravelComponent tripData={trip} index={index} clientsData={clients} />
+            <TravelCardComponent tripData={trip} index={index} clientsData={clients} />
           </Link>
         ))}
       </div>

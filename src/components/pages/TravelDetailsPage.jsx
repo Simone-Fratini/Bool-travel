@@ -1,5 +1,5 @@
 import { trips, guides, clients } from "../../models/db_trips.js"
-import TravelComponent from "../common/TravelComponent"
+import TravelDetailComponent from "../common/TravelDetailComponent.jsx"
 import ClientNamSurComponent from "../common/clientNamSurComponent.jsx"
 import ClientDetailsComponent from "../common/ClientDetailscomponent.jsx"
 import { Link } from "react-router-dom"
@@ -37,10 +37,10 @@ export default function TravelDetailsPage({ index }) {
     console.log(tripClients)
 
     return (
-        <main>
+        <div className="container mx-auto p-6 ">
             <div className="one-trip">
                 {/* [travelId - 1] per sincronizzare id e index, che poi inserendo il database useremo direttamente l'index */}
-                <TravelComponent tripData={trips[travelId - 1]} />
+                <TravelDetailComponent tripData={trips[travelId - 1]} />
             </div>
             <div>
                 <h2>Rubrica Partecipanti</h2>
@@ -74,7 +74,7 @@ export default function TravelDetailsPage({ index }) {
                     )
                 })}
             </div>
-        </main>
+        </div>
     )
 }
 

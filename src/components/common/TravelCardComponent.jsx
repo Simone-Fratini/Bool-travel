@@ -1,6 +1,6 @@
 import { MapPin, Calendar, Users } from "lucide-react";
 
-export default function TravelComponent({ tripData, clientsData }) {
+export default function TravelCardComponent({ tripData, clientsData }) {
   return (
     <div
       key={tripData.id}

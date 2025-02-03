@@ -10,7 +10,8 @@ const trips = [
     location: "Paris, France",
     startDate: "2025/05/10",
     endDate: "2025/05/20",
-    img: "images/paris.jpg"
+    img: "images/paris.jpg",
+    description: "Explore the romantic city of Paris and its iconic landmarks. Visit the Eiffel Tower, Louvre Museum, and enjoy a cruise on the Seine River."
   },
   {
     id: 2,
@@ -18,7 +19,8 @@ const trips = [
     location: "Nairobi, Kenya",
     startDate: "2025/06/01",
     endDate: "2025/06/15",
-    img: "images/nairobi.jpg"
+    img: "images/nairobi.jpg",
+    description: "Experience the thrill of a safari in the heart of Africa. Witness the Great Migration, visit Maasai Mara, and enjoy the diverse wildlife."
   },
   {
     id: 3,
@@ -26,7 +28,8 @@ const trips = [
     location: "Bali, Indonesia",
     startDate: "2025/07/05",
     endDate: "2025/07/15",
-    img: "images/bali.jpg"
+    img: "images/bali.jpg",
+    description: "Relax on the beautiful beaches of Bali and enjoy its vibrant culture. Explore the rice terraces, visit ancient temples, and indulge in Balinese cuisine."
   },
   {
     id: 4,
@@ -34,7 +37,8 @@ const trips = [
     location: "Juneau, USA",
     startDate: "2025/08/10",
     endDate: "2025/08/20",
-    img: "images/juneau.jpg"
+    img: "images/juneau.jpg",
+    description: "Cruise through the stunning landscapes of Alaska and see its wildlife. Visit Glacier Bay, go whale watching, and explore the Alaskan wilderness."
   },
   {
     id: 5,
@@ -42,7 +46,8 @@ const trips = [
     location: "Athens, Greece",
     startDate: "2025/09/01",
     endDate: "2025/09/10",
-    img: "images/athens.jpg"
+    img: "images/athens.jpg",
+    description: "Discover the ancient ruins and rich history of Athens. Visit the Acropolis, explore the Parthenon, and enjoy the vibrant Greek culture."
   },
   {
     id: 6,
@@ -50,7 +55,8 @@ const trips = [
     location: "Manaus, Brazil",
     startDate: "2025/10/05",
     endDate: "2025/10/15",
-    img: "images/brazil.jpg"
+    img: "images/brazil.jpg",
+    description: "Explore the Amazon rainforest and its diverse ecosystem. Take a boat tour on the Amazon River, visit indigenous communities, and see exotic wildlife."
   },
   {
     id: 7,
@@ -58,7 +64,8 @@ const trips = [
     location: "Dubai, UAE",
     startDate: "2025/11/02",
     endDate: "2025/11/12",
-    img: "images/dubai.jpg"
+    img: "images/dubai.jpg",
+    description: "Embark on a thrilling trek through the deserts of Dubai. Experience dune bashing, visit the Burj Khalifa, and enjoy the luxurious lifestyle of Dubai."
   },
   {
     id: 8,
@@ -66,7 +73,8 @@ const trips = [
     location: "Alice Springs, Australia",
     startDate: "2025/12/01",
     endDate: "2025/12/12",
-    img: "images/australia.jpg"
+    img: "images/australia.jpg",
+    description: "Experience the rugged beauty of the Australian Outback. Visit Uluru, explore the Kings Canyon, and learn about Aboriginal culture."
   },
   {
     id: 9,
@@ -74,7 +82,8 @@ const trips = [
     location: "Beijing, China",
     startDate: "2025/04/05",
     endDate: "2025/04/15",
-    img: "images/beijing.jpg"
+    img: "images/beijing.jpg",
+    description: "Walk along the historic Great Wall of China and explore Beijing. Visit the Forbidden City, explore the Summer Palace, and enjoy Chinese cuisine."
   },
   {
     id: 10,
@@ -82,7 +91,8 @@ const trips = [
     location: "Reykjavik, Iceland",
     startDate: "2025/03/10",
     endDate: "2025/03/20",
-    img: "images/reykjavik.jpg"
+    img: "images/reykjavik.jpg",
+    description: "Witness the breathtaking Northern Lights in Reykjavik. Explore the Golden Circle, visit the Blue Lagoon, and experience Icelandic culture."
   }
 ];
 
