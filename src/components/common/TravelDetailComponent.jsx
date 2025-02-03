@@ -1,7 +1,7 @@
 import React from "react";
 import { MapPin, Calendar, Users, Mail, Phone } from "lucide-react";
 
-function TravelDetailComponent({ tripData }) {
+function TravelDetailComponent({ tripData, guidesData }) {
   //console.log(tripData)
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -31,18 +31,22 @@ function TravelDetailComponent({ tripData }) {
                   <p>Date: {tripData.startDate}</p>
                   <p>-{tripData.endDate}</p>
                 </div>
-
               </div>
 
               <div className="mt-6">
                 <h3 className="text-xl font-semibold mb-2">Description</h3>
                 <p className="text-gray-600">{tripData.description}</p>
               </div>
+                          
             </div>
-
-            <div>
+            
+          </div>
+          <div className="text-center mt-5">
+            <span>Guide:</span>
+            <span></span>
+          </div>
+          <div>
               {/* partecipants */}
-            </div>
           </div>
         </div>
       </div>
@@ -50,9 +54,10 @@ function TravelDetailComponent({ tripData }) {
   );
 }
 
-function ClientsNumber({ tripId, clientsData }) {
-  const clients = clientsData.filter((client) => client.tripId === tripId);
-  return clients.length;
+function FindGuide(tripData, guidesData) {
+    const guide = guidesData.filter((guide) => guide.id === tripData.guideId);
+    console.log(guide);
+    return guide;
 }
 
 export default TravelDetailComponent;

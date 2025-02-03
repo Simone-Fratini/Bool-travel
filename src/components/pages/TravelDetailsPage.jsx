@@ -1,4 +1,4 @@
-import { trips, clients } from "../../models/db_trips.js"
+import { trips, clients, guides } from "../../models/db_trips.js"
 import TravelDetailComponent from "../common/TravelDetailComponent.jsx"
 import ClientNamSurComponent from "../common/clientNamSurComponent.jsx"
 import ClientDetailsComponent from "../common/ClientDetailscomponent.jsx"
@@ -57,10 +57,10 @@ export default function TravelDetailsPage({ index }) {
 
 
     return (
-        <div className="container mx-auto p-6 ">
-            <div className="one-trip">
+        <div className="container mx-auto p-4 ">
+            <div>
                 {/* [travelId - 1] per sincronizzare id e index, che poi inserendo il database useremo direttamente l'index */}
-                <TravelDetailComponent tripData={trips[travelId - 1]} />
+                <TravelDetailComponent tripData={trips[travelId - 1]} guidesData={guides}/>
             </div>
             <div>
                 <h2>Rubrica Partecipanti</h2>
