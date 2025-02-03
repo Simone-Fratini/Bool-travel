@@ -13,9 +13,8 @@ export default function TravelDetailsPage() {
     //console.log(travelId)
     //console.log(trips[travelId])
     //creo un avariabile di stato per tenere traccia del valore (stringa) scritto nella search bar
-    const [searchImputValue, setSearchImputValue] = useState("")
+    const [inputValue, setInputValue] = useState("")
     const [searchedClients, setSearchedClients] = useState([])
-    const [fakeTripClients, setFakeTripClients] = useState([])
 
     // creo la variabile tripClients e le assegno una array vuota
 
@@ -26,40 +25,42 @@ export default function TravelDetailsPage() {
 
         return (client.tripId === trips[travelId].id)
     })
-    setFakeTripClients([...tripClients])
+    const totClients = [...tripClients]
 
     //console.log(tripClients)
     //ora che abbiamo solo i clienti partecipanti al viaggio implementiamo un altro filtraggio che seleziona i clienti in base al valore scritto nella search bar. quest'ulteriore filtraggio returnerà un'arrei contentente soltanto i clienti che nel loro nome o cognome è incluso il valore inserito nella searchbar
-    function clientsSearchFilter() {
-        if (searchImputValue === "") {
-            setSearchedClients(fakeTripClients)
-        } else {
-            console.log(searchImputValue)
-            const tripSearchedClients = tripClients.filter((client) =>
-                client.firstName.toLowerCase().includes(searchImputValue.toLowerCase()) ||
-                client.lastName.toLowerCase().includes(searchImputValue.toLowerCase())
-
+    function searchBar() {
+        if (inputValue !== "") {
+            console.log(inputValue);
+            const filteredClients = tripClients.filter((client) =>
+                client.firstName.toLowerCase().includes(inputValue.toLowerCase()) ||
+                client.lastName.toLowerCase().includes(inputValue.toLowerCase())
             );
-            console.log(tripSearchedClients)
-            setSearchedClients(tripSearchedClients)
-            console.log(searchedClients)
+            if (filteredClients !== searchedClients) {
+                setSearchedClients(filteredClients);
+            }
+
+
+        } else {
+            setSearchedClients(totClients);
         }
-        //client.toLowerCase(client.firstName).includes(toLowerCase(searchValue)) ||
-        //client.toLowerCase(client.lastName).includes(toLowerCase(searchValue))
-
-        // tripSearchedClients = tripClients.filter((client) => {
-        //     return (client.firstName.include(searchImputValue) || client.lastName.include(searchImputValue))
-
-        // })
-
+        // setSearchedClients(filteredClients);
+        // console.log(filteredClients);
+        // console.log(searchedClients);
     }
-    useEffect(clientsSearchFilter, [searchImputValue])
+    //client.toLowerCase(client.firstName).includes(toLowerCase(searchValue)) ||
+    //client.toLowerCase(client.lastName).includes(toLowerCase(searchValue))
 
-    //assegnamo alla variabile di stato il valore definito nella searchbar, cosi ogni volta che il valore della serarchbar cambia avremo un nuovo rendering dei partecipanti ad un viaggio, in questo modo non c'è bisogno di un button per confermare il valore scritto nella searcbar
-    function handleChange(event) {
-        setSearchImputValue(event.target.value);
-        console.log(searchImputValue)
-    }
+    // filteredClients = tripClients.filter((client) => {
+    //     return (client.firstName.include(inputValue) || client.lastName.include(inputValue))
+
+    // })
+
+
+    useEffect(searchBar, [inputValue])
+
+    //assegnamo alla variabile di stato il valore definito nella searchbar, cosi ogni volta che il valore della serarchbar cambia avremo un nuovo rendering dei partecipanti ad un viaggio, in questo modo non c'è bisogno di un button per confermare il valore scritto nella searchbar
+
 
 
     return (
@@ -83,8 +84,8 @@ export default function TravelDetailsPage() {
                             id="default-search"
                             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Search Mockups, Logos..."
-                            value={searchImputValue}
-                            onChange={(e) => { setSearchImputValue(e.target.value) }}
+                            value={inputValue}
+                            onChange={(e) => { setInputValue(e.target.value) }}
                             required
                         />
                     </div>
