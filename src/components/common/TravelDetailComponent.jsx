@@ -1,36 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { MapPin, Calendar, Mail, Phone, X } from "lucide-react";
+import React, { useState } from "react";
+import { MapPin, Calendar, Mail, Phone, X, Search } from "lucide-react";
 
 function TravelDetailComponent({ tripData, guidesData, clientsData }) {
   const guide = FindGuide(tripData, guidesData);
   const tripClients = clientsData.filter((client) => client.tripId === tripData.id);
 
-  // State to track the selected client
+  // States
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectedGuide, setSelectedGuide] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [showSearch, setShowSearch] = useState(false); // Toggle search bar
 
-
-  const [inputValue, setInputValue] = useState("")
-  const [searchedClients, setSearchedClients] = useState([])
-
-  const totClients = [...tripClients]
-
-  function searchBar() {
-    if (inputValue !== "") {
-      const filteredClients = tripClients.filter((client) =>
-        client.firstName.toLowerCase().includes(inputValue.toLowerCase()) ||
-        client.lastName.toLowerCase().includes(inputValue.toLowerCase())
-      );
-      if (filteredClients !== searchedClients) {
-        setSearchedClients(filteredClients);
-      }
-
-    } else {
-      setSearchedClients(totClients);
-    }
-  }
-
-  useEffect(searchBar, [inputValue])
+  // Filtra i clienti in base all'input della ricerca
+  const searchedClients = tripClients.filter((client) =>
+    client.firstName.toLowerCase().includes(inputValue.toLowerCase()) ||
+    client.lastName.toLowerCase().includes(inputValue.toLowerCase())
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -72,48 +57,62 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
           {/* Guide */}
           <div className="mt-5">
             <h3 className="text-xl font-semibold mb-2">Travel guide:</h3>
-            <span className="text-xl font-bold text-gray-600 cursor-pointer" onClick={() => setSelectedGuide(guide)} >{guide.firstName} {guide.lastName}</span>
+            <span
+              className="text-xl font-bold text-gray-600 cursor-pointer"
+              onClick={() => setSelectedGuide(guide)}
+            >
+              {guide.firstName} {guide.lastName}
+            </span>
           </div>
 
           {/* Participants */}
           <div className="mt-10 bg-gray-100 p-6 rounded-md">
-            <div className="font-bold text-center text-lg">Participants</div>
+            <div className="flex justify-between items-center">
+              <div className="font-bold text-lg">Participants</div>
+              {/* Search Icon */}
+              <button
+                className="text-gray-600 hover:text-gray-800 transition"
+                onClick={() => setShowSearch(!showSearch)}
+              >
+                <Search className="h-6 w-6" />
+              </button>
+            </div>
 
-            <form className="max-w-md mx-auto">
-              <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-                </div>
+            {/* Search Bar (Toggle Visibility) */}
+            {showSearch && (
+              <div className="mt-4">
                 <input
-                  type="search"
-                  id="default-search"
-                  className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Search a partecipant"
+                  type="text"
+                  placeholder="Search participants..."
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                   value={inputValue}
-                  onChange={(e) => { setInputValue(e.target.value) }}
-                  required
+                  onChange={(e) => setInputValue(e.target.value)}
                 />
               </div>
-            </form>
+            )}
 
+            {/* Filtered Participants List */}
             <div className="mt-4">
-              {searchedClients.map((client) => (
-                <div
-                  key={client.id}
-                  className="flex items-center justify-between border bg-gray-300 rounded-md mt-2 py-6 px-8 cursor-pointer hover:bg-gray-400 transition"
-                  onClick={() => setSelectedClient(client)}
-                >
-                  <div>
-                    <h4 className="font-semibold">{client.firstName} {client.lastName}</h4>
+              {searchedClients.length > 0 ? (
+                searchedClients.map((client) => (
+                  <div
+                    key={client.id}
+                    className="flex items-center justify-between border bg-gray-300 rounded-md mt-2 py-6 px-8 cursor-pointer hover:bg-gray-400 transition"
+                    onClick={() => setSelectedClient(client)}
+                  >
+                    <div>
+                      <h4 className="font-semibold">
+                        {client.firstName} {client.lastName}
+                      </h4>
+                    </div>
+                    <div>
+                      <div>Client: #{client.id}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div>Client: #{client.id}</div>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-center text-gray-500 mt-4">No participants found.</p>
+              )}
             </div>
           </div>
         </div>
@@ -130,7 +129,9 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
               <X className="h-6 w-6" />
             </button>
             <h3 className="text-2xl font-semibold mb-4">Client Details</h3>
-            <p><strong>Name:</strong> {selectedClient.firstName} {selectedClient.lastName}</p>
+            <p>
+              <strong>Name:</strong> {selectedClient.firstName} {selectedClient.lastName}
+            </p>
             <p className="mt-2 flex items-center">
               <Mail className="h-4 w-4 mr-2 text-gray-600" /> {selectedClient.email}
             </p>
@@ -141,6 +142,7 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
         </div>
       )}
 
+      {/* Overlay Guide */}
       {selectedGuide && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md relative">
@@ -151,7 +153,9 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
               <X className="h-6 w-6" />
             </button>
             <h3 className="text-2xl font-semibold mb-4">Guide Details</h3>
-            <p><strong>Name:</strong> {selectedGuide.firstName} {selectedGuide.lastName}</p>
+            <p>
+              <strong>Name:</strong> {selectedGuide.firstName} {selectedGuide.lastName}
+            </p>
             <p className="mt-2 flex items-center">
               <Mail className="h-4 w-4 mr-2 text-gray-600" /> {selectedGuide.email}
             </p>
@@ -165,6 +169,7 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
   );
 }
 
+// Function to find the guide for the trip
 function FindGuide(tripData, guidesData) {
   return guidesData.find((guide) => guide.tripId === tripData.id) || {};
 }
