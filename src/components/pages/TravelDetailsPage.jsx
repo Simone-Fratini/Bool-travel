@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react"
 
 
-export default function TravelDetailsPage({ index }) {
+export default function TravelDetailsPage() {
     // recupero id del viaggio
     const { travelId } = useParams();
     //console.log(travelId)
@@ -21,7 +21,7 @@ export default function TravelDetailsPage({ index }) {
     //definiamo i clienti partecipanti ad un viaggio filtrandoli dal """""data base""""".
     // Alla variave tripClients assegnamo l'array returnata dal filtraggio dei clienti. filter returnerà una array con tutti i clienti aventi il tripId uguale all'id del trip.
     const tripClients = clients.filter((client) => {
-        let returnData
+
         return (client.tripId === trips[travelId].id)
     })
     //console.log(tripClients)
