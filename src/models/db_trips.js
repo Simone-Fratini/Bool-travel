@@ -10,7 +10,7 @@ const trips = [
     location: "Paris, France",
     startDate: "2025-05-10",
     endDate: "2025-05-20",
-    img: "paris.jpg"
+    img: "images/paris.jpg"
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const trips = [
     location: "Nairobi, Kenya",
     startDate: "2025-06-01",
     endDate: "2025-06-15",
-    img: "nairobi.jpg"
+    img: "images/nairobi.jpg"
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const trips = [
     location: "Bali, Indonesia",
     startDate: "2025-07-05",
     endDate: "2025-07-15",
-    img: "bali.jpg"
+    img: "images/bali.jpg"
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const trips = [
     location: "Juneau, USA",
     startDate: "2025-08-10",
     endDate: "2025-08-20",
-    img: "juneau.jpg"
+    img: "images/juneau.jpg"
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const trips = [
     location: "Athens, Greece",
     startDate: "2025-09-01",
     endDate: "2025-09-10",
-    img: "athens.jpg"
+    img: "images/athens.jpg"
   },
   {
     id: 6,
@@ -50,7 +50,7 @@ const trips = [
     location: "Manaus, Brazil",
     startDate: "2025-10-05",
     endDate: "2025-10-15",
-    img: "brazil.jpg"
+    img: "images/brazil.jpg"
   },
   {
     id: 7,
@@ -58,7 +58,7 @@ const trips = [
     location: "Dubai, UAE",
     startDate: "2025-11-02",
     endDate: "2025-11-12",
-    img: "dubai.jpg"
+    img: "images/dubai.jpg"
   },
   {
     id: 8,
@@ -66,7 +66,7 @@ const trips = [
     location: "Alice Springs, Australia",
     startDate: "2025-12-01",
     endDate: "2025-12-12",
-    img: "australia.jpg"
+    img: "images/australia.jpg"
   },
   {
     id: 9,
@@ -74,7 +74,7 @@ const trips = [
     location: "Beijing, China",
     startDate: "2025-04-05",
     endDate: "2025-04-15",
-    img: "beijing.jpg"
+    img: "images/beijing.jpg"
   },
   {
     id: 10,
@@ -82,7 +82,7 @@ const trips = [
     location: "Reykjavik, Iceland",
     startDate: "2025-03-10",
     endDate: "2025-03-20",
-    img: "reykjavik.jpg"
+    img: "images/reykjavik.jpg"
   }
 ];
 

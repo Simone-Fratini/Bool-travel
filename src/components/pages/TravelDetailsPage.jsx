@@ -7,7 +7,8 @@ import { useParams } from 'react-router-dom';
 
 
 export default function TravelDetailsPage({ trip, index }) {
-
+    // recupero id del viaggio
+    const { travelId } = useParams();
     //creo un avariabile di stato per tenere traccia del valore (stringa) scritto nella search bar
     const [searchImputValue, setSearchImputValue] = ""
 
@@ -17,7 +18,7 @@ export default function TravelDetailsPage({ trip, index }) {
     //definiamo i clienti partecipanti ad un viaggio filtrandoli dal """""data base""""".
     // Alla variave tripClients assegnamo l'array returnata dal filtraggio dei clienti. filter returnerà una array con tutti i clienti aventi il tripId uguale all'id del trip.
     tripClients = clients.filter((client) => {
-        return (client.data.tripId === index)
+        return (client.tripId === index)
     })
 
     //ora che abbiamo solo i clienti partecipanti al viaggio implementiamo un altro filtraggio che seleziona i clienti in base al valore scritto nella search bar. quest'ulteriore filtraggio returnerà un'arrei contentente soltanto i clienti che nel loro nome o cognome è incluso il valore inserito nella searchbar
@@ -36,7 +37,7 @@ export default function TravelDetailsPage({ trip, index }) {
     return (
         <main>
             <div className="one-trip">
-                <TravelComponent tripData={trip[index]} />
+                <TravelComponent tripData={trips[travelId]} />
             </div>
             <div>
                 <h2>Rubrica Partecipanti</h2>
