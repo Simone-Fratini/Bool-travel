@@ -1,40 +1,60 @@
-import { trips, guides, clients } from "../../models/db_trips.js"
+import { trips, clients } from "../../models/db_trips.js"
 import TravelDetailComponent from "../common/TravelDetailComponent.jsx"
 import ClientNamSurComponent from "../common/clientNamSurComponent.jsx"
 import ClientDetailsComponent from "../common/ClientDetailscomponent.jsx"
 import { Link } from "react-router-dom"
 import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react"
 
 
 export default function TravelDetailsPage({ index }) {
     // recupero id del viaggio
     const { travelId } = useParams();
-    console.log(travelId)
-    console.log(trips[travelId])
+    //console.log(travelId)
+    //console.log(trips[travelId])
     //creo un avariabile di stato per tenere traccia del valore (stringa) scritto nella search bar
-    const [searchImputValue, setSearchImputValue] = ""
+    const [searchImputValue, setSearchImputValue] = useState("")
 
     // creo la variabile tripClients e le assegno una array vuota
-    let tripClients
+
 
     //definiamo i clienti partecipanti ad un viaggio filtrandoli dal """""data base""""".
     // Alla variave tripClients assegnamo l'array returnata dal filtraggio dei clienti. filter returnerà una array con tutti i clienti aventi il tripId uguale all'id del trip.
-    tripClients = clients.filter((client) => {
+    const tripClients = clients.filter((client) => {
+        let returnData
         return (client.tripId === trips[travelId].id)
     })
-
+    //console.log(tripClients)
     //ora che abbiamo solo i clienti partecipanti al viaggio implementiamo un altro filtraggio che seleziona i clienti in base al valore scritto nella search bar. quest'ulteriore filtraggio returnerà un'arrei contentente soltanto i clienti che nel loro nome o cognome è incluso il valore inserito nella searchbar
-    function clientFilter(tripClients) {
-        tripClients = tripClients.filter((client) => {
-            return (client.firstName.include(searchImputValue) || client.lastName.include(searchImputValue))
-        })
+    function clientsSearchFilter() {
+        if (searchImputValue === "") {
+        } else {
+            console.log(searchImputValue)
+            const tripSearchedClients = tripClients.filter((client) =>
+                client.firstName.toLowerCase().includes(searchImputValue.toLowerCase()) ||
+                client.lastName.toLowerCase().includes(searchImputValue.toLowerCase())
+
+            );
+            console.log(tripSearchedClients)
+            setSearchImputValue(tripSearchedClients)
+        }
+        //client.toLowerCase(client.firstName).includes(toLowerCase(searchValue)) ||
+        //client.toLowerCase(client.lastName).includes(toLowerCase(searchValue))
+
+        // tripSearchedClients = tripClients.filter((client) => {
+        //     return (client.firstName.include(searchImputValue) || client.lastName.include(searchImputValue))
+
+        // })
+
     }
+    useEffect(clientsSearchFilter, [searchImputValue])
 
     //assegnamo alla variabile di stato il valore definito nella searchbar, cosi ogni volta che il valore della serarchbar cambia avremo un nuovo rendering dei partecipanti ad un viaggio, in questo modo non c'è bisogno di un button per confermare il valore scritto nella searcbar
     function handleChange(event) {
         setSearchImputValue(event.target.value);
+        //console.log(searchImputValue)
     }
-    console.log(tripClients)
+
 
     return (
         <div className="container mx-auto p-6 ">

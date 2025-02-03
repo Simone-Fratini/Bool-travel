@@ -2,13 +2,13 @@ import React from "react";
 import { MapPin, Calendar, Users, Mail, Phone } from "lucide-react";
 
 function TravelDetailComponent({ tripData }) {
-    console.log(tripData)
+  //console.log(tripData)
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="h-96 relative">
-          <img 
-            src={tripData.img} 
+          <img
+            src={tripData.img}
             alt={tripData.tripName}
             className="w-full h-full object-cover"
           />
@@ -16,7 +16,7 @@ function TravelDetailComponent({ tripData }) {
             <h1 className="text-4xl font-bold text-white">{tripData.tripName}</h1>
           </div>
         </div>
-        
+
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -33,15 +33,15 @@ function TravelDetailComponent({ tripData }) {
                 </div>
 
               </div>
-              
+
               <div className="mt-6">
                 <h3 className="text-xl font-semibold mb-2">Description</h3>
                 <p className="text-gray-600">{tripData.description}</p>
-              </div>               
+              </div>
             </div>
 
-            <div>   
-                {/* partecipants */}          
+            <div>
+              {/* partecipants */}
             </div>
           </div>
         </div>
