@@ -10,14 +10,11 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<DefaultLayout />}>
-                    {/* index = path="/" */}
-                    <Route path="/" element={<TravelListPage />}>
-                        <Route path=":id/" element={<TravelDetailsPage />}>
-                            <Route path=":id" element={<ClientDetailsComponent />} />
-                        </Route>
-                    </Route>
-                </Route>
+                <Route path="/" element={<DefaultLayout />} />
+                {/* index = path="/" */}
+                <Route index element={<TravelListPage />} />
+                <Route path=":id/" element={<TravelDetailsPage />} />
+                <Route path=":id" element={<ClientDetailsComponent />} />
             </Routes>
         </BrowserRouter>
     );
