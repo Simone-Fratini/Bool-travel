@@ -68,7 +68,8 @@ export default function TravelDetailsPage({ index }) {
                         <div key={client.id} >
                             <ClientNamSurComponent key={client.id} clientData={client} />
                             <Link to={`/${client.id}`}>Dettaglio cliente</Link>
-                            <ClientDetailsComponent clientData={client} />{/* dare l'equivalente Tailwind di className="d-none" per questo <ClientDetailsComponent />, alterniamo tra la classe "d-none" e la classe "d-block"  grazie ad una logica toggle ogni volta che si clicca il pulsante */}
+                            <hr />
+                            {/* <ClientDetailsComponent clientData={client} />dare l'equivalente Tailwind di className="d-none" per questo <ClientDetailsComponent />, alterniamo tra la classe "d-none" e la classe "d-block"  grazie ad una logica toggle ogni volta che si clicca il pulsante */}
                         </div>
                     )
                 })}
