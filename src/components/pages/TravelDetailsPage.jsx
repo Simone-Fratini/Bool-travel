@@ -1,82 +1,69 @@
-import { trips, guides, clients } from "../../models/db_trips.js"
-import TravelComponent from "../common/TravelComponent"
-import ClientNamSurComponent from "../common/clientNamSurComponent.jsx"
-import ClientDetailsComponent from "../common/ClientDetailscomponent.jsx"
-import { Link } from "react-router-dom"
-import { useParams } from 'react-router-dom';
+import { trips, clients } from "../../models/db_trips.js";
+import TravelComponent from "../common/TravelComponent";
+import ClientNamSurComponent from "../common/clientNamSurComponent.jsx";
+import ClientDetailsComponent from "../common/ClientDetailscomponent.jsx";
+import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
 
+export default function TravelDetailsPage() {
+  const { travelId } = useParams();
+  const tripId = parseInt(travelId, 10); // Converti travelId in numero
+  const tripData = trips.find(trip => trip.id === tripId); // Trova il viaggio corretto
 
-export default function TravelDetailsPage({ index }) {
-    // recupero id del viaggio
-    const { travelId } = useParams();
-    console.log(travelId)
-    console.log(trips[travelId])
-    //creo un avariabile di stato per tenere traccia del valore (stringa) scritto nella search bar
-    const [searchImputValue, setSearchImputValue] = ""
+  if (!tripData) {
+    return <h2 className="text-center text-red-600 text-xl">Viaggio non trovato</h2>;
+  }
 
-    // creo la variabile tripClients e le assegno una array vuota
-    let tripClients
+  const [searchImputValue, setSearchImputValue] = useState(""); // Stato corretto
 
-    //definiamo i clienti partecipanti ad un viaggio filtrandoli dal """""data base""""".
-    // Alla variave tripClients assegnamo l'array returnata dal filtraggio dei clienti. filter returnerà una array con tutti i clienti aventi il tripId uguale all'id del trip.
-    tripClients = clients.filter((client) => {
-        return (client.tripId === trips[travelId].id)
-    })
+  // Filtriamo i clienti che partecipano al viaggio
+  const tripClients = clients.filter(client => client.tripId === tripId);
 
-    //ora che abbiamo solo i clienti partecipanti al viaggio implementiamo un altro filtraggio che seleziona i clienti in base al valore scritto nella search bar. quest'ulteriore filtraggio returnerà un'arrei contentente soltanto i clienti che nel loro nome o cognome è incluso il valore inserito nella searchbar
-    function clientFilter(tripClients) {
-        tripClients = tripClients.filter((client) => {
-            return (client.firstName.include(searchImputValue) || client.lastName.include(searchImputValue))
-        })
-    }
+  // Ulteriore filtraggio in base alla search bar
+  const filteredClients = tripClients.filter(client => 
+    client.firstName.toLowerCase().includes(searchImputValue.toLowerCase()) ||
+    client.lastName.toLowerCase().includes(searchImputValue.toLowerCase())
+  );
 
-    //assegnamo alla variabile di stato il valore definito nella searchbar, cosi ogni volta che il valore della serarchbar cambia avremo un nuovo rendering dei partecipanti ad un viaggio, in questo modo non c'è bisogno di un button per confermare il valore scritto nella searcbar
-    function handleChange(event) {
-        setSearchImputValue(event.target.value);
-    }
-    console.log(tripClients)
+  return (
+    <main className="container mx-auto p-6">
+      <div className="one-trip">
+        <TravelComponent tripData={tripData} />
+      </div>
 
-    return (
-        <main>
-            <div className="one-trip">
-                {/* [travelId - 1] per sincronizzare id e index, che poi inserendo il database useremo direttamente l'index */}
-                <TravelComponent tripData={trips[travelId - 1]} />
-            </div>
-            <div>
-                <h2>Rubrica Partecipanti</h2>
-                <form className="max-w-md mx-auto">
-                    <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                    <div className="relative">
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </div>
-                        <input
-                            type="search"
-                            id="default-search"
-                            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search Mockups, Logos..."
-                            value={searchImputValue}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </form>
-                {tripClients.map((client) => {
-                    return (
-                        <div key={client.id} >
-                            <ClientNamSurComponent key={client.id} clientData={client} />
-                            <Link to={`/${client.id}`}>Dettaglio cliente</Link>
-                            <ClientDetailsComponent clientData={client} />{/* dare l'equivalente Tailwind di className="d-none" per questo <ClientDetailsComponent />, alterniamo tra la classe "d-none" e la classe "d-block"  grazie ad una logica toggle ogni volta che si clicca il pulsante */}
-                        </div>
-                    )
-                })}
-            </div>
-        </main>
-    )
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Rubrica Partecipanti</h2>
+        
+        <form className="max-w-md mx-auto">
+          <input
+            type="search"
+            id="default-search"
+            className="block w-full p-4 text-sm border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Cerca partecipanti..."
+            value={searchImputValue}
+            onChange={(e) => setSearchImputValue(e.target.value)}
+          />
+        </form>
+
+        <div className="mt-4 space-y-4">
+          {filteredClients.length > 0 ? (
+            filteredClients.map((client) => (
+              <div key={client.id} className="p-4 bg-white rounded-lg shadow-md">
+                <ClientNamSurComponent clientData={client} />
+                <Link
+                  to={`/${client.id}`}
+                  className="text-blue-600 hover:underline font-semibold"
+                >
+                  Dettaglio cliente
+                </Link>
+                <ClientDetailsComponent clientData={client} />
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500 text-center mt-4">Nessun partecipante trovato.</p>
+          )}
+        </div>
+      </div>
+    </main>
+  );
 }
-
-// if (clients.data.tripId === index) {
-//     tripClients.push(clients[index])
-// } else { }
