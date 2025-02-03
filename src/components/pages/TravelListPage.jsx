@@ -13,7 +13,7 @@ export default function TravelListPage() {
           <Link
             key={trip.id}
             to={`/${trip.id}`}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 block"
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl  duration-300 block hover:scale-105 transition-all"
           >
             <TravelCardComponent tripData={trip} index={index} clientsData={clients} />
           </Link>
