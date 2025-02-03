@@ -13,7 +13,7 @@ export default function App() {
                 <Route element={<DefaultLayout />}>
                     {/* index = path="/" */}
                     <Route path="/" element={<TravelListPage />}>
-                        <Route path=":id" element={<TravelDetailsPage />}>
+                        <Route path=":id/" element={<TravelDetailsPage />}>
                             <Route path=":id" element={<ClientDetailsComponent />} />
                         </Route>
                     </Route>
