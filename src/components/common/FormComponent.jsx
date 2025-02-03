@@ -6,7 +6,8 @@ const initialTravel = {
     location: "",
     startDate: "",
     endDate: "",
-    description: ""
+    description: "",
+    img: "https://picsum.photos/seed/picsum/300/200"
 };
 
 export default function FormComponent() {
@@ -19,6 +20,7 @@ export default function FormComponent() {
 
         // Add the new travel to the list
         setTravelList([...travelList, newTravel]);
+        console.log(travelList);
 
         // Reset form
         setNewTravel(initialTravel);
