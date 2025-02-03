@@ -67,8 +67,8 @@ export default function TravelDetailsPage() {
         <div className="container mx-auto p-4 ">
             <div>
                 {/* [travelId - 1] per sincronizzare id e index, che poi inserendo il database useremo direttamente l'index */}
-                <TravelDetailComponent tripData={trips[travelId - 1]} guidesData={guides} />
-                <TravelDetailComponent tripData={trips[travelId - 1]} guidesData={guides} clientsData={clients}/>
+                {/* <TravelDetailComponent tripData={trips[travelId - 1]} guidesData={guides} /> */}
+                <TravelDetailComponent tripData={trips[travelId - 1]} guidesData={guides} clientsData={clients} />
             </div>
             <div>
                 <h2>Rubrica Partecipanti</h2>
