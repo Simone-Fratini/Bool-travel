@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { trips } from "../../models/db_trips";
 import { useParams } from "react-router-dom";
 
 const initialTravel = {
@@ -7,7 +7,6 @@ const initialTravel = {
     location: "",
     startDate: "",
     endDate: "",
-    img: "",
     description: ""
 };
 
@@ -15,12 +14,13 @@ export default function FormComponent({ overlay }) {
     const { id } = useParams();
 
     const [newTravel, setNewTravel] = useState(initialTravel);
-    const [travelList, setTravelList] = useState([]);
+    const [travelList, setTravelList] = useState([...trips]);
 
 
     function handleSubmit(e) {
         e.preventDefault();
         sendData();
+        setTravelList([...travelList, newTravel]);
         setNewTravel(initialTravel);
         window.location.reload();
     }
@@ -38,43 +38,66 @@ export default function FormComponent({ overlay }) {
         <div className={`${overlay} overlayForm  position-absolute t-0 l-0 w-100 h-100 d-flex justify-content-center flex-column align-items-center`}>
             <form onSubmit={handleSubmit} className="w-50 bg-white p-5 rounded-3">
                 <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
+                    <label htmlFor="name" className="form-label">Travel name</label>
                     <input
                         type="text"
                         className="form-control"
                         id="username"
-                        name="name"
-                        placeholder="Enter your name"
-                        value={userReview.name}
+                        name="tripName"
+                        placeholder="Travel name"
+                        value={initialTravel.tripName}
                         onChange={handleChange}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="text" className="form-label">Review</label>
-                    <textarea
+                    <label htmlFor="name" className="form-label">Location</label>
+                    <input
+                        type="text"
                         className="form-control"
-                        id="text"
-                        name="text"
-                        rows="3"
-                        placeholder="Enter your review"
-                        value={userReview.text}
+                        id="username"
+                        name="location"
+                        placeholder="Enter your name"
+                        value={initialTravel.location}
                         onChange={handleChange}
-                    ></textarea>
+                    />
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="vote" className="form-label">Vote</label>
+                    <label htmlFor="name" className="form-label">Starting Date</label>
                     <input
-                        type="number"
-                        min="0"
-                        max="5"
-                        step="1"
+                        type="date"
                         className="form-control"
-                        id="vote"
-                        name="vote"
-                        placeholder="Enter your vote from 1 to 5"
-                        value={userReview.vote}
+                        id="username"
+                        name="startDate"
+                        placeholder="Enter your name"
+                        value={initialTravel.startDate}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Ending date</label>
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="username"
+                        name="endDate"
+                        placeholder="Enter your name"
+                        value={initialTravel.endDate}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Description</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="username"
+                        name="description"
+                        placeholder="Enter your name"
+                        value={initialTravel.description}
                         onChange={handleChange}
                     />
                 </div>
