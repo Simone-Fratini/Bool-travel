@@ -15,6 +15,7 @@ export default function FormComponent() {
 
     function handleSubmit(e) {
         e.preventDefault();
+        alert("Travel added successfully!");
 
         // Add the new travel to the list
         setTravelList([...travelList, newTravel]);
