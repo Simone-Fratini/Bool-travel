@@ -2,15 +2,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TravelListPage from "./components/pages/TravelListPage.jsx"
 import TravelDetailsPage from "./components/pages/TravelDetailsPage.jsx"
 import DefaultLayout from "./components/layout/DefaultLayout.jsx"
+import ClientDetailsComponent from "./components/common/ClientDetailscomponent.jsx";
+//import { trips, clients, guides } from "./models/db_trips.js";
 
 export default function App() {
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route element={<DefaultLayout />}>
-                    <Route path="/">
-                        <Route index element={<TravelListPage />} />
-                        <Route path=":id" element={<TravelDetailsPage />} />
+                    {/* index = path="/" */}
+                    <Route path="/" element={<TravelListPage />}>
+                        <Route path=":id/" element={<TravelDetailsPage />}>
+                            <Route path=":id" element={<ClientDetailsComponent />} />
+                        </Route>
                     </Route>
                 </Route>
             </Routes>
