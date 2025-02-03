@@ -84,7 +84,7 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
                 <input
                   type="text"
                   placeholder="Search participants..."
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                 />
