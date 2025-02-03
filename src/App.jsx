@@ -14,7 +14,7 @@ export default function App() {
                     {/* index = path="/" */}
                     <Route index element={<TravelListPage />} />
                     <Route path=":travelId/" element={<TravelDetailsPage />} />
-                    <Route path=":clientId" element={<ClientDetailsComponent />} />
+                    <Route path="client/:clientId" element={<ClientDetailsComponent />} />
                 </Route>
             </Routes>
         </BrowserRouter>

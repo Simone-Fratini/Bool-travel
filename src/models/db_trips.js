@@ -8,80 +8,80 @@ const trips = [
     id: 1,
     tripName: "European Discovery",
     location: "Paris, France",
-    startDate: "2025-05-10",
-    endDate: "2025-05-20",
+    startDate: "2025/05/10",
+    endDate: "2025/05/20",
     img: "images/paris.jpg"
   },
   {
     id: 2,
     tripName: "Safari Adventure",
     location: "Nairobi, Kenya",
-    startDate: "2025-06-01",
-    endDate: "2025-06-15",
+    startDate: "2025/06/01",
+    endDate: "2025/06/15",
     img: "images/nairobi.jpg"
   },
   {
     id: 3,
     tripName: "Tropical Escape",
     location: "Bali, Indonesia",
-    startDate: "2025-07-05",
-    endDate: "2025-07-15",
+    startDate: "2025/07/05",
+    endDate: "2025/07/15",
     img: "images/bali.jpg"
   },
   {
     id: 4,
     tripName: "Alaskan Cruise",
     location: "Juneau, USA",
-    startDate: "2025-08-10",
-    endDate: "2025-08-20",
+    startDate: "2025/08/10",
+    endDate: "2025/08/20",
     img: "images/juneau.jpg"
   },
   {
     id: 5,
     tripName: "Ancient Ruins",
     location: "Athens, Greece",
-    startDate: "2025-09-01",
-    endDate: "2025-09-10",
+    startDate: "2025/09/01",
+    endDate: "2025/09/10",
     img: "images/athens.jpg"
   },
   {
     id: 6,
     tripName: "Rainforest Expedition",
     location: "Manaus, Brazil",
-    startDate: "2025-10-05",
-    endDate: "2025-10-15",
+    startDate: "2025/10/05",
+    endDate: "2025/10/15",
     img: "images/brazil.jpg"
   },
   {
     id: 7,
     tripName: "Desert Trek",
     location: "Dubai, UAE",
-    startDate: "2025-11-02",
-    endDate: "2025-11-12",
+    startDate: "2025/11/02",
+    endDate: "2025/11/12",
     img: "images/dubai.jpg"
   },
   {
     id: 8,
     tripName: "Australian Outback",
     location: "Alice Springs, Australia",
-    startDate: "2025-12-01",
-    endDate: "2025-12-12",
+    startDate: "2025/12/01",
+    endDate: "2025/12/12",
     img: "images/australia.jpg"
   },
   {
     id: 9,
     tripName: "Great Wall Tour",
     location: "Beijing, China",
-    startDate: "2025-04-05",
-    endDate: "2025-04-15",
+    startDate: "2025/04/05",
+    endDate: "2025/04/15",
     img: "images/beijing.jpg"
   },
   {
     id: 10,
     tripName: "Northern Lights",
     location: "Reykjavik, Iceland",
-    startDate: "2025-03-10",
-    endDate: "2025-03-20",
+    startDate: "2025/03/10",
+    endDate: "2025/03/20",
     img: "images/reykjavik.jpg"
   }
 ];
