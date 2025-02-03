@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { trips } from "../../models/db_trips";
-import { useParams } from "react-router-dom";
 
 const initialTravel = {
     tripName: "",
@@ -10,24 +9,22 @@ const initialTravel = {
     description: ""
 };
 
-export default function FormComponent({ overlay }) {
-    const { id } = useParams();
-
+export default function FormComponent() {
     const [newTravel, setNewTravel] = useState(initialTravel);
     const [travelList, setTravelList] = useState([...trips]);
 
-
     function handleSubmit(e) {
         e.preventDefault();
-        sendData();
+
+        // Add the new travel to the list
         setTravelList([...travelList, newTravel]);
+
+        // Reset form
         setNewTravel(initialTravel);
-        window.location.reload();
     }
 
     function handleChange(e) {
         const { name, value } = e.target;
-        //console.log(`Updating ${name} to ${value}`);
         setNewTravel({
             ...newTravel,
             [name]: value,
@@ -35,76 +32,82 @@ export default function FormComponent({ overlay }) {
     }
 
     return (
-        <div className={`${overlay} overlayForm  position-absolute t-0 l-0 w-100 h-100 d-flex justify-content-center flex-column align-items-center`}>
-            <form onSubmit={handleSubmit} className="w-50 bg-white p-5 rounded-3">
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Travel name</label>
+        <div className="flex justify-center items-center min-h-screen p-6">
+            <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg">
+                <h2 className="text-2xl font-semibold mb-4 text-center">Add New Travel</h2>
+
+                {/* Travel Name */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Travel Name</label>
                     <input
                         type="text"
-                        className="form-control"
-                        id="username"
+                        className="w-full p-2 border rounded-md"
                         name="tripName"
-                        placeholder="Travel name"
-                        value={initialTravel.tripName}
+                        placeholder="Enter travel name"
+                        value={newTravel.tripName}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Location</label>
+                {/* Location */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Location</label>
                     <input
                         type="text"
-                        className="form-control"
-                        id="username"
+                        className="w-full p-2 border rounded-md"
                         name="location"
-                        placeholder="Enter your name"
-                        value={initialTravel.location}
+                        placeholder="Enter location"
+                        value={newTravel.location}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Starting Date</label>
+                {/* Start Date */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Starting Date</label>
                     <input
                         type="date"
-                        className="form-control"
-                        id="username"
+                        className="w-full p-2 border rounded-md"
                         name="startDate"
-                        placeholder="Enter your name"
-                        value={initialTravel.startDate}
+                        value={newTravel.startDate}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Ending date</label>
+                {/* End Date */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Ending Date</label>
                     <input
                         type="date"
-                        className="form-control"
-                        id="username"
+                        className="w-full p-2 border rounded-md"
                         name="endDate"
-                        placeholder="Enter your name"
-                        value={initialTravel.endDate}
+                        value={newTravel.endDate}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Description</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="username"
+                {/* Description */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea
+                        className="w-full p-2 border rounded-md"
                         name="description"
-                        placeholder="Enter your name"
-                        value={initialTravel.description}
+                        placeholder="Enter description"
+                        value={newTravel.description}
                         onChange={handleChange}
+                        required
                     />
                 </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                {/* Submit Button */}
+                <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                    Submit
+                </button>
             </form>
         </div>
-
     );
 }
