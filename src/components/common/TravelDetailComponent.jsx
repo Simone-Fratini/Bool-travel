@@ -1,8 +1,14 @@
-import React from "react";
-import { MapPin, Calendar, Users, Mail, Phone } from "lucide-react";
+import React, { useState } from "react";
+import { MapPin, Calendar, Users, Mail, Phone, X } from "lucide-react";
 
-function TravelDetailComponent({ tripData, guidesData }) {
-  //console.log(tripData)
+function TravelDetailComponent({ tripData, guidesData, clientsData }) {
+  const guide = FindGuide(tripData, guidesData);
+  const tripClients = clientsData.filter((client) => client.tripId === tripData.id);
+
+  // State to track the selected client
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [selectedGuide, setSelectedGuide] = useState(null);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -29,7 +35,7 @@ function TravelDetailComponent({ tripData, guidesData }) {
                 <div className="flex items-center text-gray-600">
                   <Calendar className="h-4 w-4 mr-2" />
                   <p>Date: {tripData.startDate}</p>
-                  <p>-{tripData.endDate}</p>
+                  <p>- {tripData.endDate}</p>
                 </div>
               </div>
 
@@ -37,27 +43,86 @@ function TravelDetailComponent({ tripData, guidesData }) {
                 <h3 className="text-xl font-semibold mb-2">Description</h3>
                 <p className="text-gray-600">{tripData.description}</p>
               </div>
-                          
             </div>
-            
           </div>
-          <div className="text-center mt-5">
-            <span>Guide:</span>
-            <span></span>
+
+          {/* Guide */}
+          <div className="mt-5">
+            <h3 className="text-xl font-semibold mb-2">Travel guide:</h3>
+            <span className="text-xl font-bold text-gray-600 cursor-pointer" onClick={() => setSelectedGuide(guide)} >{guide.firstName} {guide.lastName}</span>
           </div>
-          <div>
-              {/* partecipants */}
+
+          {/* Participants */}
+          <div className="mt-10 bg-gray-100 p-6 rounded-md">
+            <div className="font-bold text-center text-lg">Participants</div>
+            <div className="mt-4">
+              {tripClients.map((client) => (
+                <div 
+                  key={client.id} 
+                  className="flex items-center justify-between border bg-gray-300 rounded-md mt-2 py-6 px-8 cursor-pointer hover:bg-gray-400 transition"
+                  onClick={() => setSelectedClient(client)}
+                >
+                  <div>
+                    <h4 className="font-semibold">{client.firstName} {client.lastName}</h4>
+                  </div>
+                  <div>
+                    <div>Client: #{client.id}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Overlay Client */}
+      {selectedClient && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md relative">
+            <button 
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setSelectedClient(null)}
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <h3 className="text-2xl font-semibold mb-4">Client Details</h3>
+            <p><strong>Name:</strong> {selectedClient.firstName} {selectedClient.lastName}</p>
+            <p className="mt-2 flex items-center">
+              <Mail className="h-4 w-4 mr-2 text-gray-600" /> {selectedClient.email}
+            </p>
+            <p className="mt-2 flex items-center">
+              <Phone className="h-4 w-4 mr-2 text-gray-600" /> {selectedClient.phoneNumber}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {selectedGuide && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md relative">
+            <button 
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setSelectedGuide(null)}
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <h3 className="text-2xl font-semibold mb-4">Guide Details</h3>
+            <p><strong>Name:</strong> {selectedGuide.firstName} {selectedGuide.lastName}</p>
+            <p className="mt-2 flex items-center">
+              <Mail className="h-4 w-4 mr-2 text-gray-600" /> {selectedGuide.email}
+            </p>
+            <p className="mt-2 flex items-center">
+              <Phone className="h-4 w-4 mr-2 text-gray-600" /> {selectedGuide.phoneNumber}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 function FindGuide(tripData, guidesData) {
-    const guide = guidesData.filter((guide) => guide.id === tripData.guideId);
-    console.log(guide);
-    return guide;
+  return guidesData.find((guide) => guide.tripId === tripData.id) || {};
 }
 
 export default TravelDetailComponent;
