@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { MapPin, Calendar, Users, Mail, Phone, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { MapPin, Calendar, Mail, Phone, X } from "lucide-react";
 
 function TravelDetailComponent({ tripData, guidesData, clientsData }) {
   const guide = FindGuide(tripData, guidesData);
@@ -8,6 +8,29 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
   // State to track the selected client
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectedGuide, setSelectedGuide] = useState(null);
+
+
+  const [inputValue, setInputValue] = useState("")
+  const [searchedClients, setSearchedClients] = useState([])
+
+  const totClients = [...tripClients]
+
+  function searchBar() {
+    if (inputValue !== "") {
+      const filteredClients = tripClients.filter((client) =>
+        client.firstName.toLowerCase().includes(inputValue.toLowerCase()) ||
+        client.lastName.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      if (filteredClients !== searchedClients) {
+        setSearchedClients(filteredClients);
+      }
+
+    } else {
+      setSearchedClients(totClients);
+    }
+  }
+
+  useEffect(searchBar, [inputValue])
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -55,10 +78,31 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
           {/* Participants */}
           <div className="mt-10 bg-gray-100 p-6 rounded-md">
             <div className="font-bold text-center text-lg">Participants</div>
+
+            <form className="max-w-md mx-auto">
+              <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search Mockups, Logos..."
+                  value={inputValue}
+                  onChange={(e) => { setInputValue(e.target.value) }}
+                  required
+                />
+              </div>
+            </form>
+
             <div className="mt-4">
-              {tripClients.map((client) => (
-                <div 
-                  key={client.id} 
+              {searchedClients.map((client) => (
+                <div
+                  key={client.id}
                   className="flex items-center justify-between border bg-gray-300 rounded-md mt-2 py-6 px-8 cursor-pointer hover:bg-gray-400 transition"
                   onClick={() => setSelectedClient(client)}
                 >
@@ -79,7 +123,7 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
       {selectedClient && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md relative">
-            <button 
+            <button
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
               onClick={() => setSelectedClient(null)}
             >
@@ -100,7 +144,7 @@ function TravelDetailComponent({ tripData, guidesData, clientsData }) {
       {selectedGuide && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md relative">
-            <button 
+            <button
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
               onClick={() => setSelectedGuide(null)}
             >
