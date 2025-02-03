@@ -6,19 +6,21 @@ import { Link } from "react-router-dom"
 import { useParams } from 'react-router-dom';
 
 
-export default function TravelDetailsPage({ trip, index }) {
+export default function TravelDetailsPage({ index }) {
     // recupero id del viaggio
     const { travelId } = useParams();
+    console.log(travelId)
+    console.log(trips[travelId])
     //creo un avariabile di stato per tenere traccia del valore (stringa) scritto nella search bar
     const [searchImputValue, setSearchImputValue] = ""
 
     // creo la variabile tripClients e le assegno una array vuota
-    let tripClients = []
+    let tripClients
 
     //definiamo i clienti partecipanti ad un viaggio filtrandoli dal """""data base""""".
     // Alla variave tripClients assegnamo l'array returnata dal filtraggio dei clienti. filter returnerà una array con tutti i clienti aventi il tripId uguale all'id del trip.
     tripClients = clients.filter((client) => {
-        return (client.tripId === index)
+        return (client.tripId === trips[travelId].id)
     })
 
     //ora che abbiamo solo i clienti partecipanti al viaggio implementiamo un altro filtraggio che seleziona i clienti in base al valore scritto nella search bar. quest'ulteriore filtraggio returnerà un'arrei contentente soltanto i clienti che nel loro nome o cognome è incluso il valore inserito nella searchbar
@@ -32,21 +34,22 @@ export default function TravelDetailsPage({ trip, index }) {
     function handleChange(event) {
         setSearchImputValue(event.target.value);
     }
-
+    console.log(tripClients)
 
     return (
         <main>
             <div className="one-trip">
-                <TravelComponent tripData={trips[travelId]} />
+                {/* [travelId - 1] per sincronizzare id e index, che poi inserendo il database useremo direttamente l'index */}
+                <TravelComponent tripData={trips[travelId - 1]} />
             </div>
             <div>
                 <h2>Rubrica Partecipanti</h2>
                 <form className="max-w-md mx-auto">
-                    <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
                         <input
