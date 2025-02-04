@@ -30,6 +30,15 @@ export default function TravelCardComponent({ tripData, clientsData }) {
           <div className="flex items-center text-gray-600">
             <Users className="h-4 w-4 mr-2" />
             <span>Participants: <ClientsNumber tripId={tripData.id} clientsData={clientsData} /></span>
+            <span className="inline-flex items-center ml-4 rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
+              Gia' effettuato
+            </span>
+            <span className="inline-flex items-center ml-5 mr-5 rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
+              In corso
+            </span>
+            <span className="inline-flex items-center ml-3 rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset">
+              In programma
+            </span>
           </div>
         </div>
       </div>
